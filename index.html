@@ -5,10 +5,8 @@
   <title>SVG Progress</title>
 
   <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./styles/main.css">
   <style>
-    .radial-progress{
-      margin: 2em auto;
-    }
     .input-group {
       padding-bottom: 1em;
     }
@@ -23,32 +21,48 @@
     <div ng-controller="RadialController as radial" class="row">
 
        <div class="col-xs-12">
-          <div svg-progress
-               class="center-block radial-progress"
-               style="width:{{radial.graph.radius *2}}px"
-               radius="radial.graph.radius"
-               track="radial.graph.trackWeight"
-               percent="radial.graph.percent"></div>
+          <div x-svg-progress
+               class="center-block"
+               data-radius="radial.graph.radius"
+               data-track="radial.graph.trackWeight"
+               data-percent="radial.graph.percent"
+               data-heading="radial.graph.heading"
+               data-caption="radial.graph.caption"
+               ></div>
        </div>
 
        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
 
-         <form >
+         <form class='form-horizontal'>
            <div class="input-group">
              <div class="input-group-addon">Radius</div>
              <input class="form-control" type="number" ng-model="radial.graph.radius" />
              <div class="input-group-addon">px</div>
            </div>
+
            <div class="input-group">
              <div class="input-group-addon">Progress</div>
              <input class="form-control" type="number" ng-model="radial.graph.percent" />
              <div class="input-group-addon">%</div>
            </div>
+
            <div class="input-group">
              <div class="input-group-addon">Track Size</div>
              <input class="form-control" type="number" ng-model="radial.graph.trackWeight" />
              <div class="input-group-addon">px</div>
            </div>
+
+           <div class="input-group">
+             <div class="input-group-addon">Heading</div>
+             <input class="form-control" type="text" ng-model="radial.graph.heading" />
+            <div class="input-group-addon">Text</div>
+          </div>
+
+          <div class="input-group">
+              <div class="input-group-addon">Caption</div>
+              <input class="form-control" type="text" ng-model="radial.graph.caption" />
+              <div class="input-group-addon">Text</div>
+          </div>
          </form>
        </div>
     </div>
