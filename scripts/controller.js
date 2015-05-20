@@ -45,7 +45,7 @@ svgProgress
 
 
 
-var myApp = angular.module('app', ['svgProgress', 'ui.slider']);
+var myApp = angular.module('app', ['svgProgress']);
 myApp
   .controller('RadialController', function($scope, $timeout) {
     var vm = this;
