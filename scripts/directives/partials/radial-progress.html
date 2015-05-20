@@ -1,0 +1,30 @@
+<svg version="1.1"
+     x="0px" y="0px"
+     ng-attr-width="{{graph.diameter}}px"
+     ng-attr-height="{{graph.diameter}}px"
+     ng-attr-viewBox="0 0 {{graph.diameter}} {{graph.diameter}}"
+     xml:space="preserve"
+     class="radial-graph">
+
+    <circle class="track"
+            fill="#eeeeee"
+            ng-attr-cx="{{ graph.radius }}"
+            ng-attr-cy="{{ graph.radius }}"
+            ng-attr-r="{{ graph.radius  }}"/>
+
+    <path class="progress"
+          fill="#FFB03B"
+          ng-attr-d='M{{ graph.radius }},{{ graph.radius }}
+             L{{ graph.radius }},0
+             A{{ graph.radius }},{{ graph.radius }}
+              1 {{graph.largeArc}},1
+              {{ graph.coords.x }},{{ graph.coords.y }}
+              z' />
+
+    <circle class="center"
+            fill="#ffffff"
+            ng-attr-cx="{{ graph.radius }}"
+            ng-attr-cy="{{ graph.radius }}"
+            ng-attr-r="{{ graph.radius - graph.trackWeight }}"/>
+
+</svg>

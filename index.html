@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SVG Progress</title>
+
+  <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+    .radial-progress{
+      margin: 2em auto;
+    }
+    .input-group {
+      padding-bottom: 1em;
+    }
+  </style>
+</head>
+<body ng-app='app' class="container">
+
+    <div class="row">
+      <h1 class="col-xs-12 text-center">SVG-Powered Radial Progress Bar</h1>
+    </div>
+
+    <div ng-controller="RadialController as radial" class="row">
+
+       <div class="col-xs-12">
+          <div svg-progress
+               class="center-block radial-progress"
+               style="width:{{radial.graph.radius *2}}px"
+               radius="radial.graph.radius"
+               track="radial.graph.trackWeight"
+               percent="radial.graph.percent"></div>
+       </div>
+
+       <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+
+         <form >
+           <div class="input-group">
+             <div class="input-group-addon">Radius</div>
+             <input class="form-control" type="number" ng-model="radial.graph.radius" />
+             <div class="input-group-addon">px</div>
+           </div>
+           <div class="input-group">
+             <div class="input-group-addon">Progress</div>
+             <input class="form-control" type="number" ng-model="radial.graph.percent" />
+             <div class="input-group-addon">%</div>
+           </div>
+           <div class="input-group">
+             <div class="input-group-addon">Track Size</div>
+             <input class="form-control" type="number" ng-model="radial.graph.trackWeight" />
+             <div class="input-group-addon">px</div>
+           </div>
+         </form>
+       </div>
+    </div>
+
+  <script src="./bower_components/angularjs/angular.min.js"></script>
+  <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="./bower_components/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+  <script src="./bower_components/angular-ui-slider/src/slider.js"></script>
+  <script src="./scripts/controller.js"></script>
+</body>
+</html>
