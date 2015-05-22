@@ -1,9 +1,12 @@
 var gulp = require('gulp'),
+    sass = require('gulp-sass'),
+    concat = require('gulp-concat'),
     connect = require('gulp-connect');
 
 var paths = {
   views: ['./*.html'],
-  scripts: ['./*/**.js']
+  scripts: ['./*/**.js'],
+  styles: ['./sass/*.scss']
 };
 
 gulp.task('connect', function() {
@@ -24,9 +27,19 @@ gulp.task('scripts', function() {
     .pipe(connect.reload());
 });
 
+
+gulp.task('sass', function () {
+  gulp.src(paths.styles)
+    .pipe(sass().on('error', sass.logError))
+    .pipe(concat('main.css'))
+    .pipe(gulp.dest('./styles'))
+    .pipe( connect.reload() );
+});
+
 gulp.task('watch', function () {
   gulp.watch(paths.views, ['html']);
   gulp.watch(paths.scripts, ['scripts']);
+  gulp.watch(paths.styles, ['sass']);
 });
 
-gulp.task('default', ['connect', 'scripts', 'html', 'watch']);
+gulp.task('default', ['connect', 'scripts', 'sass', 'html', 'watch']);

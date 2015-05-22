@@ -3,6 +3,8 @@ var svgProgress = angular.module('svgProgress', []);
 svgProgress
   .directive('svgProgress', function() {
 
+
+
   return {
     scope: {
       radius: '=?',
@@ -11,6 +13,7 @@ svgProgress
       color: '=?',
       fill: '=?'
     },
+    replace: true,
     templateUrl: './scripts/directives/partials/radial-progress.html',
     link: function(scope, iElement, iAttrs) {
 
@@ -30,6 +33,11 @@ svgProgress
         updateGraph(scope.graph);
       }
 
+      //scope.svg = 'data:image/svg+xml;base64,' + base64_encode(svg)
+      console.log(scope.graph)
+      //background-image: url('data:image/svg+xml;base64,[data]');
+
+
 
       function init(s){
         var config = {
@@ -45,12 +53,12 @@ svgProgress
       }
 
       function updateGraph(graph){
+
           var rads = (graph.percent/100) * 2 * Math.PI;
           graph.coords = {
               x: (Math.sin(rads) * graph.radius) + graph.radius,
               y: (Math.cos(rads) * graph.radius * -1) + graph.radius
           }
-
           if(graph.coords.x < graph.radius){
               graph.fillArc = 1;
               graph.trackArc = 0;
