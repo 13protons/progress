@@ -7,25 +7,40 @@ svgProgress
     scope: {
       radius: '=?',
       track: '=?',
-      percent: '=?'
+      percent: '=?',
+      color: '=?',
+      fill: '=?'
     },
     templateUrl: './scripts/directives/partials/radial-progress.html',
     link: function(scope, iElement, iAttrs) {
 
-      scope.graph = init(scope);
+      sync();
 
-      scope.$watchCollection('[percent, track, radius]', function(){
-          scope.graph = init(scope)
-          updateGraph(scope.graph);
-      });
+      scope.$watchCollection('[color, fill, percent, track, radius]', function(){
+          sync();
+      }, true);
+
+      function sync(){
+        scope.graph = init(scope);
+
+        if(scope.graph.percent == 0 || scope.graph.percent % 100 == 0){
+          scope.graph.percent = .1;
+          scope.graph.fill = scope.graph.color;
+        }
+        updateGraph(scope.graph);
+      }
+
 
       function init(s){
         var config = {
           radius:      angular.isDefined(s.radius) ? s.radius : 100,
           trackWeight: angular.isDefined(s.track) ? s.track : 20,
           percent:     angular.isDefined(s.percent) ? s.percent : 45,
+          color:       angular.isDefined(s.color) ? s.color : '#EEEEEE',
+          fill:        angular.isDefined(s.fill) ? s.fill : '#FFB03B'
         }
         config.diameter = config.radius * 2;
+        config.innerRadius = config.radius - config.trackWeight;
         return config
       }
 
@@ -36,8 +51,14 @@ svgProgress
               y: (Math.cos(rads) * graph.radius * -1) + graph.radius
           }
 
-          if(graph.coords.x < graph.radius){ graph.largeArc = 1; }
-          else { graph.largeArc = 0;}
+          if(graph.coords.x < graph.radius){
+              graph.fillArc = 1;
+              graph.trackArc = 0;
+            }
+          else {
+              graph.fillArc = 0;
+              graph.trackArc = 1;
+            }
       }
     }
   }
@@ -53,6 +74,8 @@ myApp
         radius: 150,
         trackWeight: 40,
         percent: 62.5,
+        trackColor: '#EEEEEE',
+        color: '#FFB03B'
     }
 
 })

@@ -17,7 +17,7 @@
 <body ng-app='app' class="container">
 
     <div class="row">
-      <h1 class="col-xs-12 text-center">SVG-Powered Radial Progress Bar</h1>
+      <h1 class="col-xs-12 text-center">Angular-Powered SVG Radial Progress Bar</h1>
     </div>
 
     <div ng-controller="RadialController as radial" class="row">
@@ -28,11 +28,13 @@
                style="width:{{radial.graph.radius *2}}px"
                radius="radial.graph.radius"
                track="radial.graph.trackWeight"
-               percent="radial.graph.percent"></div>
+               percent="radial.graph.percent"
+               color="radial.graph.trackColor"
+               fill="radial.graph.color"
+               ></div>
        </div>
 
        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-
          <form >
            <div class="input-group">
              <div class="input-group-addon">Radius</div>
@@ -49,6 +51,17 @@
              <input class="form-control" type="number" ng-model="radial.graph.trackWeight" />
              <div class="input-group-addon">px</div>
            </div>
+
+           <div class="input-group">
+             <div class="input-group-addon">Track Color</div>
+             <input class="form-control" type="color" ng-model="radial.graph.trackColor" />
+           </div>
+
+           <div class="input-group">
+             <div class="input-group-addon">Fill color</div>
+             <input class="form-control" type="color" ng-model="radial.graph.color" />
+           </div>
+
          </form>
        </div>
     </div>
